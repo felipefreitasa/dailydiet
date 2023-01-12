@@ -17,7 +17,6 @@ export const Container = styled(TouchableOpacity)<Props>`
   border-radius: 6px;
   border-width: 1px;
   padding: 16px;
-  display: flex;
   flex: 1;
   align-items: center;
   justify-content: center;
