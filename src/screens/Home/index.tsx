@@ -3,7 +3,7 @@ import { MealsPercentageInTheDiet } from "@components/MealsPercentageInTheDiet"
 import { Button } from "@components/Button"
 import { Meal } from "@components/Meal"
 
-import { FullWidthContainer, AddMealLabel, Container, Date } from "./styles"
+import { AddMealContainer, AddMealLabel, Container, Date, MealsContainer } from "./styles"
 
 export function Home(){
   return (
@@ -16,7 +16,7 @@ export function Home(){
         percentage={90}
       />
 
-      <FullWidthContainer>
+      <AddMealContainer>
         <AddMealLabel>
           Refeições
         </AddMealLabel>
@@ -25,9 +25,9 @@ export function Home(){
           title='Nova refeição'
           icon='ADD'
         />
-      </FullWidthContainer>
+      </AddMealContainer>
 
-      <FullWidthContainer>
+      <MealsContainer>
         <Date>
           12.08.22
         </Date>
@@ -37,8 +37,7 @@ export function Home(){
           mealName='Whey com banana'
           isInTheDiet
         />
-      </FullWidthContainer>
-      
+      </MealsContainer>
     </Container>
   )
 }

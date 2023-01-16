@@ -5,7 +5,7 @@ import theme from './src/theme'
 
 import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from '@expo-google-fonts/nunito-sans'
 
-import { Home } from '@screens/Home'
+import { Routes } from './src/routers'
 
 import { Loading } from '@components/Loading'
 
@@ -20,7 +20,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <Home/> : <Loading/>}
+      {fontsLoaded ? <Routes/> : <Loading/>}
     </ThemeProvider>
   );
 }

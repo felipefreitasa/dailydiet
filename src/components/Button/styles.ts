@@ -17,7 +17,6 @@ export const Container = styled(TouchableOpacity)<ButtonProps>`
   border-width: 1px;
   border-color: ${({ theme, type }) => type === 'CONTAINED' ? 'transparent' : theme.COLORS.GRAY_1};
   padding: 16px 24px;
-  flex: 1;
   align-items: center;
   justify-content: center;
   flex-direction: row;
