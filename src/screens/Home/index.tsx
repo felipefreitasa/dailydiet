@@ -4,8 +4,15 @@ import { Button } from "@components/Button"
 import { Meal } from "@components/Meal"
 
 import { AddMealContainer, AddMealLabel, Container, Date, MealsContainer } from "./styles"
+import { useNavigation } from "@react-navigation/native"
 
 export function Home(){
+  const navigation = useNavigation()
+
+  function handleGoToStatistics(){
+    navigation.navigate('statistics', { mealsPercentageInTheDiet: 90 })
+  }
+
   return (
     <Container>
       <HeaderHome
@@ -14,6 +21,7 @@ export function Home(){
 
       <MealsPercentageInTheDiet 
         percentage={90}
+        onPress={handleGoToStatistics}
       />
 
       <AddMealContainer>
