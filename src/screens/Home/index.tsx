@@ -10,7 +10,7 @@ export function Home(){
   const navigation = useNavigation()
 
   function handleGoToStatistics(){
-    navigation.navigate('statistics', { mealsPercentageInTheDiet: 90 })
+    navigation.navigate('statistics', { mealsPercentageInTheDiet: 45.98 })
   }
 
   return (
@@ -20,7 +20,7 @@ export function Home(){
       />
 
       <MealsPercentageInTheDiet 
-        percentage={90}
+        percentage={45.98}
         onPress={handleGoToStatistics}
       />
 

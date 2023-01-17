@@ -3,8 +3,9 @@ import { useRoute } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
 
-import {  Container } from "./styles"
 import { Header } from "@components/Header"
+
+import {  Container, StatisticsContainer, RoundedContainer, MealsInTheDietContainer, Paragraph, Percentage, StatisticsTitle } from "./styles"
 
 type RouteParams = {
   mealsPercentageInTheDiet: number;
@@ -30,10 +31,27 @@ export function Statistics(){
           <Header
             backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}
             arrowColor={isGoodPercentage ? COLORS.GREEN_DARK : COLORS.RED_DARK}
-            title='Refeição'
           />
 
-          
+          <MealsInTheDietContainer isGoodPercentage={isGoodPercentage}>
+            <Percentage>
+              {mealsPercentageInTheDiet}%
+            </Percentage>
+
+            <Paragraph>
+              das refeições dentro da dieta
+            </Paragraph>
+          </MealsInTheDietContainer>
+
+          <StatisticsContainer isGoodPercentage={isGoodPercentage}>
+            <RoundedContainer>
+              <StatisticsTitle>
+                Estatísticas gerais
+              </StatisticsTitle>
+
+              
+            </RoundedContainer>
+          </StatisticsContainer>
         </Container>
     </>
   )
