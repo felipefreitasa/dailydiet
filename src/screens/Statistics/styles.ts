@@ -48,12 +48,20 @@ export const RoundedContainer = styled.View`
   align-items: center;
   justify-content: flex-start;
   padding: 40px 20px 20px 20px;
+  width: 100%;
 `
 
 export const StatisticsTitle = styled.Text`
+  margin-bottom: 24px;
+  
   ${({ theme }) => css`
     font-family: ${theme.FONT_FAMILY.BOLD};
     color: ${theme.COLORS.GRAY_1};
     font-size: ${theme.FONT_SIZE.SM}px;
   `}
+`
+
+export const RowContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
 `
