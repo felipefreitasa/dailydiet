@@ -35,22 +35,6 @@ export const Paragraph = styled.Text`
   `}
 `
 
-export const StatisticsContainer = styled.View<Props>`
-  background-color: ${({ theme, isGoodPercentage }) => isGoodPercentage ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
-  flex: 1;
-`
-
-export const RoundedContainer = styled.View`
-  background-color: ${({theme}) => theme.COLORS.GRAY_7};
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 40px 20px 20px 20px;
-  width: 100%;
-`
-
 export const StatisticsTitle = styled.Text`
   margin-bottom: 24px;
   

@@ -6,7 +6,8 @@ import { useTheme } from "styled-components/native"
 import { Header } from "@components/Header"
 import { StatisticCard } from "@components/StatisticCard"
 
-import {  Container, StatisticsContainer, RoundedContainer, MealsInTheDietContainer, Paragraph, Percentage, StatisticsTitle, RowContainer } from "./styles"
+import {  Container, MealsInTheDietContainer, Paragraph, Percentage, StatisticsTitle, RowContainer } from "./styles"
+import { RoundedContainer } from "@components/RoundedContainer"
 
 type RouteParams = {
   mealsPercentageInTheDiet: number;
@@ -44,40 +45,38 @@ export function Statistics(){
             </Paragraph>
           </MealsInTheDietContainer>
 
-          <StatisticsContainer isGoodPercentage={isGoodPercentage}>
-            <RoundedContainer>
-              <StatisticsTitle>
-                Estatísticas gerais
-              </StatisticsTitle>
+          <RoundedContainer backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}>
+            <StatisticsTitle>
+              Estatísticas gerais
+            </StatisticsTitle>
 
+            <StatisticCard
+              title={22}
+              subtitle="melhor sequência de pratos dentro da dieta"
+              backgroundColor={COLORS.GRAY_6}
+            />
+
+            <StatisticCard
+              title={109}
+              subtitle="refeições registradas"
+              backgroundColor={COLORS.GRAY_6}
+            />
+
+            <RowContainer>
               <StatisticCard
-                title={22}
-                subtitle="melhor sequência de pratos dentro da dieta"
-                backgroundColor={COLORS.GRAY_6}
+                title={99}
+                subtitle="refeições dentro da dieta"
+                backgroundColor={COLORS.GREEN_LIGHT}
+                style={{ marginRight: 12 }}
               />
 
               <StatisticCard
-                title={109}
-                subtitle="refeições registradas"
-                backgroundColor={COLORS.GRAY_6}
+                title={10}
+                subtitle="refeições fora da dieta"
+                backgroundColor={COLORS.RED_LIGHT}
               />
-
-              <RowContainer>
-                <StatisticCard
-                  title={99}
-                  subtitle="refeições dentro da dieta"
-                  backgroundColor={COLORS.GREEN_LIGHT}
-                  style={{ marginRight: 12 }}
-                />
-
-                <StatisticCard
-                  title={10}
-                  subtitle="refeições fora da dieta"
-                  backgroundColor={COLORS.RED_LIGHT}
-                />
-              </RowContainer>
-            </RoundedContainer>
-          </StatisticsContainer>
+            </RowContainer>
+          </RoundedContainer>
         </Container>
     </>
   )

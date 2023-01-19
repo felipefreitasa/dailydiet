@@ -5,7 +5,7 @@ export declare global {
       statistics: {
         mealsPercentageInTheDiet: number;
       };
-      registerMeal: undefined;
+      mealRegister: undefined;
       successMealRegisters: undefined;
       mealDetails: undefined;
     }

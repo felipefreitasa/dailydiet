@@ -1,16 +1,21 @@
+import { useNavigation } from "@react-navigation/native"
+
 import { HeaderHome } from "@components/HeaderHome"
 import { MealsPercentageInTheDiet } from "@components/MealsPercentageInTheDiet"
 import { Button } from "@components/Button"
 import { Meal } from "@components/Meal"
 
 import { AddMealContainer, AddMealLabel, Container, Date, MealsContainer } from "./styles"
-import { useNavigation } from "@react-navigation/native"
 
 export function Home(){
   const navigation = useNavigation()
 
   function handleGoToStatistics(){
     navigation.navigate('statistics', { mealsPercentageInTheDiet: 45.98 })
+  }
+
+  function handleGoToMealRegister(){
+    navigation.navigate('mealRegister')
   }
 
   return (
@@ -32,6 +37,7 @@ export function Home(){
         <Button
           title='Nova refeição'
           icon='ADD'
+          onPress={handleGoToMealRegister}
         />
       </AddMealContainer>
 

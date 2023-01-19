@@ -5,7 +5,7 @@ type Props = {
 }
 
 export const Container = styled.View<Props>`
-  height: 45px;
+  height: 60px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
