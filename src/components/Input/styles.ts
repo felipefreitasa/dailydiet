@@ -9,6 +9,7 @@ type Props = {
 
 export const Container = styled.View`
   width: 100%;
+  margin-bottom: 24px;
 `
 
 export const InputContainer = styled(TextInput)<Props>`
