@@ -50,9 +50,7 @@ export function Button({ title, type = 'CONTAINED', icon, ...rest }: Props){
     >
       {icon && handleButtonIcon(icon)}
 
-      <Title 
-        type={type}
-      >
+      <Title type={type}>
         {title}
       </Title>
     </Container>

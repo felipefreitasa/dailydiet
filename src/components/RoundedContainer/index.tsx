@@ -1,3 +1,4 @@
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { Container, RoundedContentContainer } from "./styles"
 
 type Props = {
@@ -6,11 +7,18 @@ type Props = {
 }
 
 export function RoundedContainer({ children, backgroundColor }: Props){
+  
+  function handleCloseKeyboard(){
+    Keyboard.dismiss();
+  }
+
   return (
-    <Container backgroundColor={backgroundColor}>
-      <RoundedContentContainer>
-        {children}
-      </RoundedContentContainer>
-    </Container>
+    <TouchableWithoutFeedback onPress={handleCloseKeyboard}>
+      <Container backgroundColor={backgroundColor}>
+        <RoundedContentContainer>
+          {children}
+        </RoundedContentContainer>
+      </Container>
+    </TouchableWithoutFeedback>
   )
 }

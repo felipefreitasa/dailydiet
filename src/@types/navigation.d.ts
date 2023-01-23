@@ -6,8 +6,10 @@ export declare global {
         mealsPercentageInTheDiet: number;
       };
       mealRegister: undefined;
-      successMealRegisters: undefined;
       mealDetails: undefined;
+      feedback: {
+        isMealInTheDiet: string;
+      };
     }
   }
 }
