@@ -5,14 +5,12 @@ import { useNavigation } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
 
-import { formatDate } from "@helpers/formatDate"
-import { formatHour } from "@helpers/formatHour"
-
 import { Header } from "@components/Header"
 import { Input } from "@components/Input"
 import { RoundedContainer } from "@components/RoundedContainer"
 import { SelectButton } from "@components/SelectButton"
 import { Button } from "@components/Button"
+import { MaskedInput } from "@components/MaskedInput"
 
 import {  Container, Content, InputContainer, Label, RowContainer, TopContainer } from "./styles"
 
@@ -68,30 +66,30 @@ export function MealRegister(){
               
               <RowContainer>
                 <InputContainer>
-                  <Input
+                  <MaskedInput
+                    type='datetime'
+                    options={{ format: 'DD/MM/YYYY' }}
                     label='Data'
-                    value={formatDate(date)}
+                    value={date}
                     onChangeText={e => setDate(e)}
-                    maxLength={10}
-                    autoCorrect={false}
-                    keyboardType='numeric'
                   />
                 </InputContainer>
 
                 <InputContainer>
-                  <Input
+                  <MaskedInput
+                    type='datetime'
+                    options={{ format: 'HH:mm' }}
                     label='Hora'
-                    value={formatHour(hour)}
+                    value={hour}
                     onChangeText={e => setHour(e)}
-                    maxLength={5}
-                    autoCorrect={false}
-                    keyboardType='numeric'
                   />
-                </InputContainer>
+                </InputContainer> 
               </RowContainer>
 
               <View>
-                <Label>Está dentro da dieta ?</Label>
+                <Label>
+                  Está dentro da dieta ?
+                </Label>
 
                 <RowContainer>
                   <SelectButton
