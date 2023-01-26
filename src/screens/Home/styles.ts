@@ -29,7 +29,9 @@ margin-bottom: 8px;
   `}
 `
 
-export const MealsContainer = styled.View`
+export const MealsContainer = styled.ScrollView.attrs(() => ({
+  showsVerticalScrollIndicator: false,
+}))`
   width: 100%;
 `
 
@@ -41,4 +43,8 @@ export const Date = styled.Text`
     color: ${theme.COLORS.GRAY_1};
     font-size: ${theme.FONT_SIZE.LG}px;
   `}
+`
+
+export const MealsDay = styled.View`
+  margin-bottom: 32px;
 `

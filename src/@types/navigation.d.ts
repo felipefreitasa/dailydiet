@@ -6,7 +6,9 @@ export declare global {
         mealsPercentageInTheDiet: number;
       };
       mealRegister: undefined;
-      mealDetails: undefined;
+      mealDetails:  {
+        isMealInTheDiet: boolean;
+      };
       feedback: {
         isMealInTheDiet: string;
       };
