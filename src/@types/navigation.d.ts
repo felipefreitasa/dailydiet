@@ -7,7 +7,11 @@ export declare global {
       };
       mealRegister: undefined;
       mealDetails:  {
-        isMealInTheDiet: boolean;
+        name: string;
+        description: string;
+        date: string;
+        hour: string;
+        isInTheDiet: boolean;
       };
       feedback: {
         isMealInTheDiet: string;

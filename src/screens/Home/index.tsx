@@ -11,6 +11,14 @@ import { Meal } from "@components/Meal"
 
 import { AddMealContainer, AddMealLabel, Container, Date, MealsContainer, MealsDay } from "./styles"
 
+export type MealTypeProps = {
+  name: string;
+  description: string;
+  date: string;
+  hour: string;
+  isInTheDiet: boolean;
+}
+
 export function Home(){
   const navigation = useNavigation()
 
@@ -22,8 +30,8 @@ export function Home(){
     navigation.navigate('mealRegister')
   }
 
-  function handleGoToMealDetails(){
-    navigation.navigate('mealDetails', { isMealInTheDiet: true })
+  function handleGoToMealDetails(mealDetails: MealTypeProps){
+    navigation.navigate('mealDetails', { ...mealDetails })
   }
 
   const mealsListAgrouppedByDate = _.groupBy(mealsListMock, 'date')
@@ -65,7 +73,7 @@ export function Home(){
                 hour={mealItem.hour}
                 mealName={mealItem.name}
                 isInTheDiet={mealItem.isInTheDiet}
-                onPress={handleGoToMealDetails}
+                onPress={() => handleGoToMealDetails(mealItem)}
               />
             ))}
           </MealsDay>
