@@ -27,7 +27,7 @@ export function Home(){
   }
 
   function handleGoToMealRegister(){
-    navigation.navigate('mealRegister')
+    navigation.navigate('mealRegister', { isRegister: true })
   }
 
   function handleGoToMealDetails(mealDetails: MealTypeProps){

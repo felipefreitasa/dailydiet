@@ -2,7 +2,7 @@ import { StatusBar, View } from "react-native"
 
 import { useTheme } from "styled-components/native"
 
-import { useRoute } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { RoundedContainer } from "@components/RoundedContainer"
 import { Header } from "@components/Header"
@@ -16,8 +16,14 @@ import { Container, Description, Name, ContentContainer, DateTimeTitle, Content 
 export function MealDetails(){
   const { COLORS } = useTheme()
 
+  const navigation = useNavigation()
+
   const route = useRoute()
   const { isInTheDiet, date, description, hour, name } = route.params as MealTypeProps
+
+  function handleGoToEditMeal(){
+    navigation.navigate('mealRegister', { isRegister: false,  isInTheDiet, date, description, hour, name })
+  }
 
   return (
     <>
@@ -64,6 +70,7 @@ export function MealDetails(){
               <Button
                 title='Editar refeição'
                 icon='EDIT'
+                onPress={handleGoToEditMeal}
                 style={{ marginBottom: 8 }}
               />
 

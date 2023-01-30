@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { StatusBar, View } from "react-native"
 
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
+
+import { MealTypeProps } from "@screens/Home"
 
 import { Header } from "@components/Header"
 import { Input } from "@components/Input"
@@ -16,19 +18,26 @@ import {  Container, Content, InputContainer, Label, RowContainer, TopContainer 
 
 export type SelectProps = 'sim' | 'não'
 
+type RouteParamsTypeProps = MealTypeProps & {
+  isRegister: boolean;
+}
+
 export function MealRegister(){
-  const[name, setName] = useState("")
-  const[description, setDescription] = useState("")
-  const[date, setDate] = useState("")
-  const [hour, setHour] = useState("")
-  const [isSelected, setIsSelected] = useState<SelectProps>('sim')
+  const route = useRoute()
+  const { isInTheDiet, date, description, hour, name, isRegister  } = route.params as RouteParamsTypeProps
+
+  const[mealName, setMealName] = useState(isRegister ? "" : name)
+  const[mealDescription, setMealDescription] = useState(isRegister ? "" : description)
+  const[mealDate, setMealDate] = useState(isRegister ? "" : date)
+  const [mealHour, setMealHour] = useState(isRegister ? "" : hour) 
+  const [isMealSelected, setIsMealSelected] = useState<SelectProps>(isRegister ? 'sim' : (isInTheDiet ? 'sim' : 'não'))
 
   const navigation = useNavigation()
 
   const { COLORS } = useTheme()
 
   function handleGoToFeedback(){
-    navigation.navigate('feedback', { isMealInTheDiet: isSelected })
+    navigation.navigate('feedback', { isMealInTheDiet: isMealSelected })
   }
 
   return (
@@ -43,7 +52,7 @@ export function MealRegister(){
         <Header
           arrowColor={COLORS.GRAY_2}
           backgroundColor={COLORS.GRAY_5}
-          title='Nova refeição'
+          title={ isRegister ? 'Nova refeição' : 'Editar refeição' }
         />
         
         <RoundedContainer backgroundColor={COLORS.GRAY_5}>
@@ -51,16 +60,16 @@ export function MealRegister(){
             <TopContainer>
               <Input
                 label='Nome'
-                value={name}
-                onChangeText={e => setName(e)}
+                value={mealName}
+                onChangeText={e => setMealName(e)}
                 autoCorrect={false}
               />
 
               <Input
                 label='Descrição'
                 isDescription
-                value={description}
-                onChangeText={e => setDescription(e)}
+                value={mealDescription}
+                onChangeText={e => setMealDescription(e)}
                 autoCorrect={false}
               />
               
@@ -70,8 +79,8 @@ export function MealRegister(){
                     type='datetime'
                     options={{ format: 'DD/MM/YYYY' }}
                     label='Data'
-                    value={date}
-                    onChangeText={e => setDate(e)}
+                    value={mealDate}
+                    onChangeText={e => setMealDate(e)}
                   />
                 </InputContainer>
 
@@ -80,8 +89,8 @@ export function MealRegister(){
                     type='datetime'
                     options={{ format: 'HH:mm' }}
                     label='Hora'
-                    value={hour}
-                    onChangeText={e => setHour(e)}
+                    value={mealHour}
+                    onChangeText={e => setMealHour(e)}
                   />
                 </InputContainer> 
               </RowContainer>
@@ -94,23 +103,23 @@ export function MealRegister(){
                 <RowContainer>
                   <SelectButton
                     type="AFFIRMATIVE"
-                    isSelected={isSelected === 'sim'}
+                    isSelected={isMealSelected === 'sim'}
                     label='Sim'
-                    onPress={() => setIsSelected('sim')}
+                    onPress={() => setIsMealSelected('sim')}
                   />
 
                   <SelectButton
                     type="NEGATIVE"
-                    isSelected={isSelected === 'não'}
+                    isSelected={isMealSelected === 'não'}
                     label='Não'
-                    onPress={() => setIsSelected('não')}
+                    onPress={() => setIsMealSelected('não')}
                   />
                 </RowContainer>
               </View>
             </TopContainer>
 
             <Button
-              title="Cadastrar refeição"
+              title={isRegister ? "Cadastrar refeição" : "Salvar alterações"}
               style={{ width: '100%' }}
               onPress={handleGoToFeedback}
             />
