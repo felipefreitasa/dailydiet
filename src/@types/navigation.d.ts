@@ -5,8 +5,21 @@ export declare global {
       statistics: {
         mealsPercentageInTheDiet: number;
       };
-      mealRegister: undefined;
-      mealDetails: undefined;
+      mealRegister:{
+        isRegister: boolean;
+        name?: string;
+        description?: string;
+        date?: string;
+        hour?: string;
+        isInTheDiet?: boolean;
+      };
+      mealDetails:  {
+        name: string;
+        description: string;
+        date: string;
+        hour: string;
+        isInTheDiet: boolean;
+      };
       feedback: {
         isMealInTheDiet: string;
       };

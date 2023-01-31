@@ -22,9 +22,7 @@ export function Meal({ hour, mealName, isInTheDiet, ...rest }: Props) {
         </MealName>
       </LeftContainer>
 
-      <Point
-        isInTheDiet={isInTheDiet}
-      />
+      <Point isInTheDiet={isInTheDiet} />
     </Container>
   )
 }
