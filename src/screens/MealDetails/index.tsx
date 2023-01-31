@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { StatusBar, View } from "react-native"
 
 import { useTheme } from "styled-components/native"
@@ -8,12 +9,15 @@ import { RoundedContainer } from "@components/RoundedContainer"
 import { Header } from "@components/Header"
 import { ChipStatus } from "@components/ChipStatus"
 import { Button } from "@components/Button"
+import { DeleteModal } from "./DeleteModal"
 
 import { MealTypeProps } from "@screens/Home"
 
 import { Container, Description, Name, ContentContainer, DateTimeTitle, Content } from "./styles"
 
 export function MealDetails(){
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+
   const { COLORS } = useTheme()
 
   const navigation = useNavigation()
@@ -78,11 +82,18 @@ export function MealDetails(){
                 title='Excluir refeição'
                 icon='REMOVE'
                 type='OUTLINED'
+                onPress={() => setIsDeleteModalVisible(true)}
               />
             </View>
           </Content>
         </RoundedContainer>
       </Container>
+
+      <DeleteModal
+        isVisible={isDeleteModalVisible}
+        onClose={() => setIsDeleteModalVisible(false)}
+        onDelete={() => {setIsDeleteModalVisible(true)}}
+      />
     </>
   )
 }
