@@ -5,6 +5,8 @@ import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
 
+import { mealCreate } from '@storage/meals/mealCreate'
+
 import { MealTypeProps } from "@screens/Home"
 
 import { Header } from "@components/Header"
@@ -35,6 +37,19 @@ export function MealRegister(){
   const navigation = useNavigation()
 
   const { COLORS } = useTheme()
+
+  async function handleRegisterMeal(){
+    try {
+      const isMealInTheDiet = isMealSelected === 'sim' ? true : false
+
+      await mealCreate(mealName, mealDescription, mealDate, mealHour, isMealInTheDiet)
+
+      handleGoToFeedback()
+
+    } catch (error) {
+      console.log('🚀 ~ error', error)
+    }
+  }
 
   function handleGoToFeedback(){
     navigation.navigate('feedback', { isMealInTheDiet: isMealSelected })
@@ -121,7 +136,7 @@ export function MealRegister(){
             <Button
               title={isRegister ? "Cadastrar refeição" : "Salvar alterações"}
               style={{ width: '100%' }}
-              onPress={handleGoToFeedback}
+              onPress={isRegister ? handleRegisterMeal : handleGoToFeedback}
             />
           </Content>
         </RoundedContainer>
