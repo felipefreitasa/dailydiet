@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { StatusBar, View } from "react-native"
+import { Alert, StatusBar, View } from "react-native"
 
 import { useNavigation, useRoute } from "@react-navigation/native"
 
@@ -47,7 +47,7 @@ export function MealRegister(){
       handleGoToFeedback()
 
     } catch (error) {
-      console.log('🚀 ~ error', error)
+      Alert.alert('Nova refeição', 'Não foi possível cadastrar a refeição. Tente novamente.')
     }
   }
 

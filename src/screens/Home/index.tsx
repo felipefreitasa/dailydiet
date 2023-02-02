@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react"
+import { Alert } from "react-native"
 
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
@@ -16,6 +17,7 @@ import { Loading } from "@components/Loading"
 import { AddMealContainer, AddMealLabel, Container, Date, MealsContainer, MealsDay } from "./styles"
 
 export type MealTypeProps = {
+  id: string;
   name: string;
   description: string;
   date: string;
@@ -29,18 +31,6 @@ export function Home(){
 
   const navigation = useNavigation()
 
-  function handleGoToStatistics(){
-    navigation.navigate('statistics', { mealsPercentageInTheDiet: 45.98 })
-  }
-
-  function handleGoToMealRegister(){
-    navigation.navigate('mealRegister', { isRegister: true })
-  }
-
-  function handleGoToMealDetails(mealDetails: MealTypeProps){
-    navigation.navigate('mealDetails', { ...mealDetails })
-  }
-
   async function fetchMeals(){
     try {
       setIsLoading(true)
@@ -53,7 +43,7 @@ export function Home(){
       setIsLoading(false)
       
     } catch (error) {
-      console.log('🚀 ~ error', error)
+      Alert.alert('Refeições', 'Não foi possível carregas as refeições.')
       
     } finally {
       setIsLoading(false)
@@ -63,7 +53,7 @@ export function Home(){
   useFocusEffect(useCallback(() => {
     fetchMeals()
   }, []))
-  
+
   return (
     <Container>
       <HeaderHome
@@ -72,7 +62,7 @@ export function Home(){
 
       <MealsPercentageInTheDiet 
         percentage={45.98}
-        onPress={handleGoToStatistics}
+        onPress={() => navigation.navigate('statistics', { mealsPercentageInTheDiet: 45.98 })}
       />
 
       <AddMealContainer>
@@ -83,7 +73,7 @@ export function Home(){
         <Button
           title='Nova refeição'
           icon='ADD'
-          onPress={handleGoToMealRegister}
+          onPress={() => navigation.navigate('mealRegister', { isRegister: true })}
         />
       </AddMealContainer>
 
@@ -95,13 +85,13 @@ export function Home(){
                 {removeDateFormat(date[0].date)}
               </Date>
 
-              {date.map((mealItem, index) => (
+              {date.map((mealItem) => (
                 <Meal
-                  key={index}
+                  key={mealItem.id}
                   hour={mealItem.hour}
                   mealName={mealItem.name}
                   isInTheDiet={mealItem.isInTheDiet}
-                  onPress={() => handleGoToMealDetails(mealItem)}
+                  onPress={() => navigation.navigate('mealDetails', { ...mealItem })}
                 />
               ))}
             </MealsDay>
