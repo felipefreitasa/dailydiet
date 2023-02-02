@@ -1,9 +1,11 @@
 import { useState } from "react"
-import { StatusBar, View } from "react-native"
+import { Alert, StatusBar, View } from "react-native"
 
 import { useTheme } from "styled-components/native"
 
 import { useNavigation, useRoute } from "@react-navigation/native"
+
+import { mealRemove } from "@storage/meals/mealRemove"
 
 import { RoundedContainer } from "@components/RoundedContainer"
 import { Header } from "@components/Header"
@@ -23,10 +25,19 @@ export function MealDetails(){
   const navigation = useNavigation()
 
   const route = useRoute()
-  const { isInTheDiet, date, description, hour, name } = route.params as MealTypeProps
+  const { id, isInTheDiet, date, description, hour, name } = route.params as MealTypeProps
 
-  function handleGoToEditMeal(){
-    navigation.navigate('mealRegister', { isRegister: false,  isInTheDiet, date, description, hour, name })
+  async function handleDeleteMeal(){
+    try {
+      await mealRemove(id)
+
+      setIsDeleteModalVisible(false)
+
+      navigation.navigate('home')
+
+    } catch (error) {
+      Alert.alert('Apagar refeição', 'Não foi possível apagar essa refeição.')
+    }
   }
 
   return (
@@ -74,7 +85,7 @@ export function MealDetails(){
               <Button
                 title='Editar refeição'
                 icon='EDIT'
-                onPress={handleGoToEditMeal}
+                onPress={() => navigation.navigate('mealRegister', { isRegister: false,  isInTheDiet, date, description, hour, name })}
                 style={{ marginBottom: 8 }}
               />
 
@@ -92,7 +103,7 @@ export function MealDetails(){
       <DeleteModal
         isVisible={isDeleteModalVisible}
         onClose={() => setIsDeleteModalVisible(false)}
-        onDelete={() => {setIsDeleteModalVisible(true)}}
+        onDelete={handleDeleteMeal}
       />
     </>
   )
