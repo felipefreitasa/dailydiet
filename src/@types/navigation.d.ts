@@ -6,6 +6,7 @@ export declare global {
         mealsPercentageInTheDiet: number;
       };
       mealRegister:{
+        id?: string;
         isRegister: boolean;
         name?: string;
         description?: string;

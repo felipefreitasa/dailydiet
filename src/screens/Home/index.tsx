@@ -56,9 +56,7 @@ export function Home(){
 
   return (
     <Container>
-      <HeaderHome
-        userName="FF"
-      />
+      <HeaderHome />
 
       <MealsPercentageInTheDiet 
         percentage={45.98}

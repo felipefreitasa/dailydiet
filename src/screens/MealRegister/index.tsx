@@ -6,6 +6,7 @@ import { useNavigation, useRoute } from "@react-navigation/native"
 import { useTheme } from "styled-components/native"
 
 import { mealCreate } from '@storage/meals/mealCreate'
+import { mealEdit } from "@storage/meals/mealEdit"
 
 import { MealTypeProps } from "@screens/Home"
 
@@ -26,7 +27,7 @@ type RouteParamsTypeProps = MealTypeProps & {
 
 export function MealRegister(){
   const route = useRoute()
-  const { isInTheDiet, date, description, hour, name, isRegister  } = route.params as RouteParamsTypeProps
+  const { id, isInTheDiet, date, description, hour, name, isRegister  } = route.params as RouteParamsTypeProps
 
   const[mealName, setMealName] = useState(isRegister ? "" : name)
   const[mealDescription, setMealDescription] = useState(isRegister ? "" : description)
@@ -44,17 +45,27 @@ export function MealRegister(){
 
       await mealCreate(mealName, mealDescription, mealDate, mealHour, isMealInTheDiet)
 
-      handleGoToFeedback()
+      navigation.navigate('feedback', { isMealInTheDiet: isMealSelected })
 
     } catch (error) {
       Alert.alert('Nova refeição', 'Não foi possível cadastrar a refeição. Tente novamente.')
     }
   }
 
-  function handleGoToFeedback(){
-    navigation.navigate('feedback', { isMealInTheDiet: isMealSelected })
+  async function handleEditMeal(){
+    try {
+      const isMealInTheDiet = isMealSelected === 'sim' ? true : false
+
+      await mealEdit(id, mealName, mealDescription, mealDate, mealHour, isMealInTheDiet)
+
+      navigation.navigate('feedback', { isMealInTheDiet: isMealSelected })
+
+    } catch (error) {
+      Alert.alert('Editar refeição', 'Não foi possível editar a refeição.')
+    }
   }
 
+ 
   return (
     <>
       <StatusBar
@@ -136,7 +147,7 @@ export function MealRegister(){
             <Button
               title={isRegister ? "Cadastrar refeição" : "Salvar alterações"}
               style={{ width: '100%' }}
-              onPress={isRegister ? handleRegisterMeal : handleGoToFeedback}
+              onPress={isRegister ? handleRegisterMeal : handleEditMeal}
             />
           </Content>
         </RoundedContainer>

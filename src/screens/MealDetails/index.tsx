@@ -85,7 +85,7 @@ export function MealDetails(){
               <Button
                 title='Editar refeição'
                 icon='EDIT'
-                onPress={() => navigation.navigate('mealRegister', { isRegister: false,  isInTheDiet, date, description, hour, name })}
+                onPress={() => navigation.navigate('mealRegister', { id, isRegister: false,  isInTheDiet, date, description, hour, name })}
                 style={{ marginBottom: 8 }}
               />
 
