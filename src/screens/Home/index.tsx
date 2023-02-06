@@ -26,10 +26,25 @@ export type MealTypeProps = {
 }
 
 export function Home(){
-  const [meals, setMeals] = useState<MealTypeProps[][]>()
+  const [allMeals, setAllMeals] = useState<MealTypeProps[]>()
+  const [orderedMeals, setOrderedMeals] = useState<MealTypeProps[][]>()
   const [isLoading, setIsLoading] = useState(false)
 
   const navigation = useNavigation()
+
+
+  function calculateMealsPercentageInTheDiet () {
+    const totalMeals = allMeals?.length
+    const totalMealsInTheDiet = allMeals?.filter(meal => meal.isInTheDiet).length
+
+    if (totalMeals && totalMealsInTheDiet){
+      const totalMealsPercentageInTheDiet = totalMealsInTheDiet / totalMeals * 100
+      
+      return Number(totalMealsPercentageInTheDiet.toFixed(2))
+    }
+  }
+
+  const mealsPercentageInTheDiet = calculateMealsPercentageInTheDiet() || 0
 
   async function fetchMeals(){
     try {
@@ -37,8 +52,10 @@ export function Home(){
       
       const data = await mealsGetAll()
 
+      setAllMeals(data)
+
       const mealsOrderedByDate = handleOrderMealsByDate(data)
-      setMeals(mealsOrderedByDate)
+      setOrderedMeals(mealsOrderedByDate)
 
       setIsLoading(false)
       
@@ -59,8 +76,8 @@ export function Home(){
       <HeaderHome />
 
       <MealsPercentageInTheDiet 
-        percentage={45.98}
-        onPress={() => navigation.navigate('statistics', { mealsPercentageInTheDiet: 45.98 })}
+        percentage={mealsPercentageInTheDiet}
+        onPress={() => navigation.navigate('statistics', { mealsPercentageInTheDiet, meals: allMeals })}
       />
 
       <AddMealContainer>
@@ -77,7 +94,7 @@ export function Home(){
 
      {isLoading ? <Loading/> : (
         <MealsContainer>
-          {meals?.map((date, index) => (
+          {orderedMeals?.map((date, index) => (
             <MealsDay key={index}>
               <Date>
                 {removeDateFormat(date[0].date)}

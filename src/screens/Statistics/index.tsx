@@ -1,25 +1,32 @@
 import { StatusBar } from "react-native"
+
 import { useRoute } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
 
+import { MealTypeProps } from "@screens/Home";
+
 import { Header } from "@components/Header"
 import { StatisticCard } from "@components/StatisticCard"
+import { RoundedContainer } from "@components/RoundedContainer"
 
 import {  Container, MealsInTheDietContainer, Paragraph, Percentage, StatisticsTitle, RowContainer } from "./styles"
-import { RoundedContainer } from "@components/RoundedContainer"
 
 type RouteParams = {
   mealsPercentageInTheDiet: number;
+  meals: MealTypeProps[]
 }
 
 export function Statistics(){
   const { COLORS } = useTheme()
 
   const route = useRoute()
-  const { mealsPercentageInTheDiet } = route.params as RouteParams
-  
+  const { mealsPercentageInTheDiet, meals } = route.params as RouteParams
+
   const isGoodPercentage = mealsPercentageInTheDiet >= 70
+
+  const mealsInTheDiet = meals.filter(meal => meal.isInTheDiet).length
+  const mealsIsNotInTheDiet = meals.filter(meal => !meal.isInTheDiet).length
 
   return (
     <>
@@ -51,27 +58,21 @@ export function Statistics(){
             </StatisticsTitle>
 
             <StatisticCard
-              title={22}
-              subtitle="melhor sequência de pratos dentro da dieta"
-              backgroundColor={COLORS.GRAY_6}
-            />
-
-            <StatisticCard
-              title={109}
+              title={meals.length}
               subtitle="refeições registradas"
               backgroundColor={COLORS.GRAY_6}
             />
 
             <RowContainer>
               <StatisticCard
-                title={99}
+                title={mealsInTheDiet}
                 subtitle="refeições dentro da dieta"
                 backgroundColor={COLORS.GREEN_LIGHT}
                 style={{ marginRight: 12 }}
               />
 
               <StatisticCard
-                title={10}
+                title={mealsIsNotInTheDiet}
                 subtitle="refeições fora da dieta"
                 backgroundColor={COLORS.RED_LIGHT}
               />
