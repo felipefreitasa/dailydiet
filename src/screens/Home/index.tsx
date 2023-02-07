@@ -16,7 +16,6 @@ import { Loading } from "@components/Loading"
 
 import { AddMealContainer, AddMealLabel, BottomMealsGradient, Container, Date, MealsContainer, MealsDay } from "./styles"
 
-
 export type MealTypeProps = {
   id: string;
   name: string;
@@ -74,7 +73,6 @@ export function Home(){
   return (
     <Container>
       <HeaderHome />
-
 
       <MealsPercentageInTheDiet 
         percentage={mealsPercentageInTheDiet}

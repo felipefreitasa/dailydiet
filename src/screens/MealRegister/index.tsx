@@ -35,21 +35,53 @@ export function MealRegister(){
   const [mealHour, setMealHour] = useState(isRegister ? "" : hour) 
   const [isMealSelected, setIsMealSelected] = useState<SelectProps>(isRegister ? 'sim' : (isInTheDiet ? 'sim' : 'não'))
 
+  const [isValidated, setIsValidated] = useState(false)
+
   const navigation = useNavigation()
 
   const { COLORS } = useTheme()
 
   async function handleRegisterMeal(){
     try {
-      const isMealInTheDiet = isMealSelected === 'sim' ? true : false
+      const isValid = validateInputFields()
 
-      await mealCreate(mealName, mealDescription, mealDate, mealHour, isMealInTheDiet)
-
-      navigation.navigate('feedback', { isMealInTheDiet: isMealSelected })
+      if(isValid) {
+        const isMealInTheDiet = isMealSelected === 'sim' ? true : false
+        
+        await mealCreate(mealName, mealDescription, mealDate, mealHour, isMealInTheDiet)
+        
+        navigation.navigate('feedback', { isMealInTheDiet: isMealSelected })
+      }
 
     } catch (error) {
       Alert.alert('Nova refeição', 'Não foi possível cadastrar a refeição. Tente novamente.')
     }
+  }
+
+  function validateInputFields(){
+    setIsValidated(true)
+
+    if (mealName.length === 0){
+      Alert.alert('Nova refeição', 'Preencha o nome da refeição.')
+      return false
+    }
+
+    if (mealDescription.length === 0){
+      Alert.alert('Nova refeição', 'Preencha a descrição da refeição.')
+      return false
+    }
+
+    if (mealDate.length === 0){
+      Alert.alert('Nova refeição', 'Preencha a data da refeição.')
+      return false
+    }
+
+    if (mealHour.length === 0){
+      Alert.alert('Nova refeição', 'Preencha a hora da refeição.')
+      return false
+    }
+
+    return true
   }
 
   async function handleEditMeal(){
@@ -64,7 +96,6 @@ export function MealRegister(){
       Alert.alert('Editar refeição', 'Não foi possível editar a refeição.')
     }
   }
-
  
   return (
     <>
@@ -89,6 +120,8 @@ export function MealRegister(){
                 value={mealName}
                 onChangeText={e => setMealName(e)}
                 autoCorrect={false}
+                hasError={isValidated && mealName.length === 0}
+                errorMessage="Campo obrigatório*"
               />
 
               <Input
@@ -97,6 +130,8 @@ export function MealRegister(){
                 value={mealDescription}
                 onChangeText={e => setMealDescription(e)}
                 autoCorrect={false}
+                hasError={isValidated && mealDescription.length === 0}
+                errorMessage="Campo obrigatório*"
               />
               
               <RowContainer>
@@ -107,6 +142,8 @@ export function MealRegister(){
                     label='Data'
                     value={mealDate}
                     onChangeText={e => setMealDate(e)}
+                    hasError={isValidated && mealDate.length === 0}
+                    errorMessage="Campo obrigatório*"
                   />
                 </InputContainer>
 
@@ -117,6 +154,8 @@ export function MealRegister(){
                     label='Hora'
                     value={mealHour}
                     onChangeText={e => setMealHour(e)}
+                    hasError={isValidated && mealHour.length === 0}
+                    errorMessage="Campo obrigatório*"
                   />
                 </InputContainer> 
               </RowContainer>

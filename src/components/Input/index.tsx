@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { TextInputProps } from 'react-native'
 
-import { Container, InputContainer, Label } from './styles'
+import { Container, ErrorMessage, InputContainer, Label } from './styles'
 
 type Props = TextInputProps & {
   label: string;
-  isDescription?: boolean
+  isDescription?: boolean;
+  hasError: boolean;
+  errorMessage: string;
 }
 
-export function Input({ label, isDescription = false, ...rest }: Props){
+export function Input({ label, isDescription = false, hasError, errorMessage, ...rest }: Props){
   const [isActive, setIsActive] = useState(false)
 
   return (
@@ -26,6 +28,12 @@ export function Input({ label, isDescription = false, ...rest }: Props){
         style={isDescription && {  textAlignVertical: 'top' }}
         {...rest}
       />
+
+      {hasError && (
+        <ErrorMessage>
+          {errorMessage}
+        </ErrorMessage>
+      )}
     </Container>
   )
 }
