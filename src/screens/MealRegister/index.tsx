@@ -5,6 +5,8 @@ import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
 
+import moment from "moment"
+
 import { mealCreate } from '@storage/meals/mealCreate'
 import { mealEdit } from "@storage/meals/mealEdit"
 
@@ -32,13 +34,13 @@ export function MealRegister(){
 
   const[mealName, setMealName] = useState(isRegister ? "" : name)
   const[mealDescription, setMealDescription] = useState(isRegister ? "" : description)
-  const[mealDate, setMealDate] = useState(isRegister ? "" : date)
-  const [mealHour, setMealHour] = useState(isRegister ? "" : hour) 
+  const[mealDate, setMealDate] = useState(isRegister ? moment().format('DD/MM/YYYY') : date)
+  const [mealHour, setMealHour] = useState(isRegister ? moment().format('HH:mm') : hour) 
   const [isMealSelected, setIsMealSelected] = useState<SelectProps>(isRegister ? 'sim' : (isInTheDiet ? 'sim' : 'não'))
-
   const [isValidated, setIsValidated] = useState(false)
 
   const navigation = useNavigation()
+  
 
   const { COLORS } = useTheme()
 
