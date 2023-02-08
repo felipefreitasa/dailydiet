@@ -1,5 +1,3 @@
-import { StatusBar } from "react-native"
-
 import { useRoute } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
@@ -9,8 +7,9 @@ import { MealTypeProps } from "@screens/Home";
 import { Header } from "@components/Header"
 import { StatisticCard } from "@components/StatisticCard"
 import { RoundedContainer } from "@components/RoundedContainer"
+import { StatusBarDefault } from "@components/StatusBarDefault";
 
-import {  Container, MealsInTheDietContainer, Paragraph, Percentage, StatisticsTitle, RowContainer } from "./styles"
+import { MealsInTheDietContainer, Paragraph, Percentage, StatisticsTitle, RowContainer } from "./styles"
 
 type RouteParams = {
   mealsPercentageInTheDiet: number;
@@ -30,55 +29,49 @@ export function Statistics(){
 
   return (
     <>
-        <StatusBar
-          barStyle='dark-content'
-          backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}
-          translucent
+      <StatusBarDefault backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}/>
+
+      <Header
+        backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}
+        arrowColor={isGoodPercentage ? COLORS.GREEN_DARK : COLORS.RED_DARK}
+      />
+
+      <MealsInTheDietContainer isGoodPercentage={isGoodPercentage}>
+        <Percentage>
+          {mealsPercentageInTheDiet}%
+        </Percentage>
+
+        <Paragraph>
+          das refeições dentro da dieta
+        </Paragraph>
+      </MealsInTheDietContainer>
+
+      <RoundedContainer backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}>
+        <StatisticsTitle>
+          Estatísticas gerais
+        </StatisticsTitle>
+
+        <StatisticCard
+          title={meals.length}
+          subtitle="refeições registradas"
+          backgroundColor={COLORS.GRAY_6}
         />
 
-        <Container>
-          <Header
-            backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}
-            arrowColor={isGoodPercentage ? COLORS.GREEN_DARK : COLORS.RED_DARK}
+        <RowContainer>
+          <StatisticCard
+            title={mealsInTheDiet}
+            subtitle="refeições dentro da dieta"
+            backgroundColor={COLORS.GREEN_LIGHT}
+            style={{ marginRight: 12 }}
           />
 
-          <MealsInTheDietContainer isGoodPercentage={isGoodPercentage}>
-            <Percentage>
-              {mealsPercentageInTheDiet}%
-            </Percentage>
-
-            <Paragraph>
-              das refeições dentro da dieta
-            </Paragraph>
-          </MealsInTheDietContainer>
-
-          <RoundedContainer backgroundColor={isGoodPercentage ? COLORS.GREEN_LIGHT : COLORS.RED_LIGHT}>
-            <StatisticsTitle>
-              Estatísticas gerais
-            </StatisticsTitle>
-
-            <StatisticCard
-              title={meals.length}
-              subtitle="refeições registradas"
-              backgroundColor={COLORS.GRAY_6}
-            />
-
-            <RowContainer>
-              <StatisticCard
-                title={mealsInTheDiet}
-                subtitle="refeições dentro da dieta"
-                backgroundColor={COLORS.GREEN_LIGHT}
-                style={{ marginRight: 12 }}
-              />
-
-              <StatisticCard
-                title={mealsIsNotInTheDiet}
-                subtitle="refeições fora da dieta"
-                backgroundColor={COLORS.RED_LIGHT}
-              />
-            </RowContainer>
-          </RoundedContainer>
-        </Container>
+          <StatisticCard
+            title={mealsIsNotInTheDiet}
+            subtitle="refeições fora da dieta"
+            backgroundColor={COLORS.RED_LIGHT}
+          />
+        </RowContainer>
+      </RoundedContainer>
     </>
   )
 }

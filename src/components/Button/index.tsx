@@ -1,9 +1,11 @@
 import { useState } from "react"
+
 import { TouchableOpacityProps } from "react-native"
 
 import { Plus, PencilSimpleLine, Trash, IconContext } from "phosphor-react-native"
 
 import { useTheme } from "styled-components/native"
+
 import { ButtonTypeStyleProps, Container, Title } from "./styles"
 
 type ButtonIconProps = 'ADD' | 'EDIT' | 'REMOVE'

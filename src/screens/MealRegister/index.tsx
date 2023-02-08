@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Alert, StatusBar, View } from "react-native"
+import { Alert, View } from "react-native"
 
 import { useNavigation, useRoute } from "@react-navigation/native"
 
@@ -16,8 +16,9 @@ import { RoundedContainer } from "@components/RoundedContainer"
 import { SelectButton } from "@components/SelectButton"
 import { Button } from "@components/Button"
 import { MaskedInput } from "@components/MaskedInput"
+import { StatusBarDefault } from "@components/StatusBarDefault"
 
-import {  Container, Content, InputContainer, Label, RowContainer, TopContainer } from "./styles"
+import { Content, InputContainer, Label, RowContainer, TopContainer } from "./styles"
 
 export type SelectProps = 'sim' | 'não'
 
@@ -99,98 +100,92 @@ export function MealRegister(){
  
   return (
     <>
-      <StatusBar
-        barStyle='dark-content'
+      <StatusBarDefault backgroundColor={COLORS.GRAY_5}/>
+
+      <Header
+        arrowColor={COLORS.GRAY_2}
         backgroundColor={COLORS.GRAY_5}
-        translucent
+        title={ isRegister ? 'Nova refeição' : 'Editar refeição' }
       />
-
-      <Container>
-        <Header
-          arrowColor={COLORS.GRAY_2}
-          backgroundColor={COLORS.GRAY_5}
-          title={ isRegister ? 'Nova refeição' : 'Editar refeição' }
-        />
         
-        <RoundedContainer backgroundColor={COLORS.GRAY_5}>
-          <Content>
-            <TopContainer>
-              <Input
-                label='Nome'
-                value={mealName}
-                onChangeText={e => setMealName(e)}
-                autoCorrect={false}
-                hasError={isValidated && mealName.length === 0}
-                errorMessage="Campo obrigatório*"
-              />
-
-              <Input
-                label='Descrição'
-                isDescription
-                value={mealDescription}
-                onChangeText={e => setMealDescription(e)}
-                autoCorrect={false}
-                hasError={isValidated && mealDescription.length === 0}
-                errorMessage="Campo obrigatório*"
-              />
-              
-              <RowContainer>
-                <InputContainer>
-                  <MaskedInput
-                    type='datetime'
-                    options={{ format: 'DD/MM/YYYY' }}
-                    label='Data'
-                    value={mealDate}
-                    onChangeText={e => setMealDate(e)}
-                    hasError={isValidated && mealDate.length === 0}
-                    errorMessage="Campo obrigatório*"
-                  />
-                </InputContainer>
-
-                <InputContainer>
-                  <MaskedInput
-                    type='datetime'
-                    options={{ format: 'HH:mm' }}
-                    label='Hora'
-                    value={mealHour}
-                    onChangeText={e => setMealHour(e)}
-                    hasError={isValidated && mealHour.length === 0}
-                    errorMessage="Campo obrigatório*"
-                  />
-                </InputContainer> 
-              </RowContainer>
-
-              <View>
-                <Label>
-                  Está dentro da dieta ?
-                </Label>
-
-                <RowContainer>
-                  <SelectButton
-                    type="AFFIRMATIVE"
-                    isSelected={isMealSelected === 'sim'}
-                    label='Sim'
-                    onPress={() => setIsMealSelected('sim')}
-                  />
-
-                  <SelectButton
-                    type="NEGATIVE"
-                    isSelected={isMealSelected === 'não'}
-                    label='Não'
-                    onPress={() => setIsMealSelected('não')}
-                  />
-                </RowContainer>
-              </View>
-            </TopContainer>
-
-            <Button
-              title={isRegister ? "Cadastrar refeição" : "Salvar alterações"}
-              style={{ width: '100%' }}
-              onPress={isRegister ? handleRegisterMeal : handleEditMeal}
+      <RoundedContainer backgroundColor={COLORS.GRAY_5}>
+        <Content>
+          <TopContainer>
+            <Input
+              label='Nome'
+              value={mealName}
+              onChangeText={e => setMealName(e)}
+              autoCorrect={false}
+              hasError={isValidated && mealName.length === 0}
+              errorMessage="Campo obrigatório*"
             />
-          </Content>
-        </RoundedContainer>
-      </Container>
+
+            <Input
+              label='Descrição'
+              isDescription
+              value={mealDescription}
+              onChangeText={e => setMealDescription(e)}
+              autoCorrect={false}
+              hasError={isValidated && mealDescription.length === 0}
+              errorMessage="Campo obrigatório*"
+            />
+              
+            <RowContainer>
+              <InputContainer>
+                <MaskedInput
+                  type='datetime'
+                  options={{ format: 'DD/MM/YYYY' }}
+                  label='Data'
+                  value={mealDate}
+                  onChangeText={e => setMealDate(e)}
+                  hasError={isValidated && mealDate.length === 0}
+                  errorMessage="Campo obrigatório*"
+                />
+              </InputContainer>
+
+              <InputContainer>
+                <MaskedInput
+                  type='datetime'
+                  options={{ format: 'HH:mm' }}
+                  label='Hora'
+                  value={mealHour}
+                  onChangeText={e => setMealHour(e)}
+                  hasError={isValidated && mealHour.length === 0}
+                  errorMessage="Campo obrigatório*"
+                />
+              </InputContainer> 
+            </RowContainer>
+
+            <View>
+              <Label>
+                Está dentro da dieta ?
+              </Label>
+
+              <RowContainer>
+                <SelectButton
+                  type="AFFIRMATIVE"
+                  isSelected={isMealSelected === 'sim'}
+                  label='Sim'
+                  onPress={() => setIsMealSelected('sim')}
+                />
+
+                <SelectButton
+                  type="NEGATIVE"
+                  isSelected={isMealSelected === 'não'}
+                  label='Não'
+                  onPress={() => setIsMealSelected('não')}
+                />
+              </RowContainer>
+            </View>
+          </TopContainer>
+
+          <Button
+            title={isRegister ? "Cadastrar refeição" : "Salvar alterações"}
+            style={{ width: '100%' }}
+            onPress={isRegister ? handleRegisterMeal : handleEditMeal}
+          />
+        </Content>
+      </RoundedContainer>
     </>
   )
 }
