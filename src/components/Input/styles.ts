@@ -35,3 +35,14 @@ export const Label = styled.Text`
     font-size: ${theme.FONT_SIZE.SM}px;
   `}
 `
+
+export const ErrorMessage = styled.Text`
+  margin-top: 4px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+    color: ${theme.COLORS.RED_DARK};
+    font-size: ${theme.FONT_SIZE.XS}px;
+  `}
+`
+

@@ -21,10 +21,10 @@ export function Feedback(){
 
   const isInTheDiet = isMealInTheDiet === 'sim'
 
-  function HandleGoToHome(){
+  function handleGoToHome(){
     navigation.navigate('home')
   }
-
+  
   return (
     <>
       <StatusBar
@@ -52,7 +52,7 @@ export function Feedback(){
 
         <Button
           title="Ir para a página inicial"
-          onPress={HandleGoToHome}
+          onPress={handleGoToHome}
           style={{ marginTop: 32 }}
         />
       </Container>

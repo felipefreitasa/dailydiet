@@ -1,21 +1,11 @@
-import { Avatar, AvatarName, Container, Logo } from './styles'
+import { Container, Logo } from './styles'
 
 import logoImg from '@assets/logo.png'
 
-type Props = {
-  userName: string
-}
-
-export function HeaderHome({ userName }: Props) {
+export function HeaderHome() {
   return (
     <Container>
       <Logo source={logoImg}/>
-
-      <Avatar>
-        <AvatarName>
-          {userName}
-        </AvatarName>
-      </Avatar>
     </Container>
   )
 }
