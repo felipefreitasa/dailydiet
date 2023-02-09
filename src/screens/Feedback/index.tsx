@@ -21,11 +21,7 @@ export function Feedback(){
 
   const isInTheDiet = isMealInTheDiet === 'sim'
 
-  function handleGoToHome(){
-    navigation.navigate('home')
-  }
-  
-  return (
+   return (
     <>
       <StatusBar
         barStyle='dark-content'
@@ -48,11 +44,11 @@ export function Feedback(){
           {isInTheDiet ? 'Muito bem!' : 'dessa vez, mas continue se esforçando e não desista!'}
         </Subtitle>
 
-        {isInTheDiet ?  <Image source={SuccessIllustration}/> :  <Image source={ErrorIllustration}/>}
+        {isInTheDiet ? <Image source={SuccessIllustration}/> : <Image source={ErrorIllustration}/>}
 
         <Button
           title="Ir para a página inicial"
-          onPress={handleGoToHome}
+          onPress={() => navigation.navigate('home')}
           style={{ marginTop: 32 }}
         />
       </Container>

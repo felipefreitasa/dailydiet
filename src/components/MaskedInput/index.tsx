@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { TextInputMaskProps } from 'react-native-masked-text';
+import { TextInputMaskProps } from 'react-native-masked-text'
 
 import { Container, ErrorMessage, InputContainer, Label } from './styles'
 
@@ -25,7 +25,6 @@ export function MaskedInput({ label, hasError, errorMessage,...rest }: Props){
         isActive={isActive}
         {...rest}
       />
-
 
       {hasError && (
         <ErrorMessage>

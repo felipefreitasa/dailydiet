@@ -1,4 +1,5 @@
 import { useState } from "react"
+
 import { Alert, View } from "react-native"
 
 import { useTheme } from "styled-components/native"
@@ -7,14 +8,14 @@ import { useNavigation, useRoute } from "@react-navigation/native"
 
 import { mealRemove } from "@storage/meals/mealRemove"
 
+import { MealTypeProps } from "@screens/Home"
+
 import { RoundedContainer } from "@components/RoundedContainer"
 import { Header } from "@components/Header"
 import { ChipStatus } from "@components/ChipStatus"
 import { Button } from "@components/Button"
 import { DeleteModal } from "./DeleteModal"
 import { StatusBarDefault } from "@components/StatusBarDefault"
-
-import { MealTypeProps } from "@screens/Home"
 
 import { Description, Name, ContentContainer, DateTimeTitle, Content } from "./styles"
 

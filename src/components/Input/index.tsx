@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { TextInputProps } from 'react-native'
 
 import { Container, ErrorMessage, InputContainer, Label } from './styles'

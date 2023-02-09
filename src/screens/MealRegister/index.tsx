@@ -1,4 +1,5 @@
 import { useState } from "react"
+
 import { Alert, View } from "react-native"
 
 import { useNavigation, useRoute } from "@react-navigation/native"
@@ -40,15 +41,14 @@ export function MealRegister(){
   const [isValidated, setIsValidated] = useState(false)
 
   const navigation = useNavigation()
-  
 
   const { COLORS } = useTheme()
 
   async function handleRegisterMeal(){
     try {
-      const isValid = validateInputFields()
+      const hasInputsBeenValidated = validateInputFields()
 
-      if(isValid) {
+      if(hasInputsBeenValidated) {
         const isMealInTheDiet = isMealSelected === 'sim' ? true : false
         
         await mealCreate(mealName, mealDescription, mealDate, mealHour, isMealInTheDiet)

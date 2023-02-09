@@ -1,10 +1,12 @@
 import { useCallback, useState } from "react"
+
 import { Alert } from "react-native"
 
 import { useNavigation, useFocusEffect } from "@react-navigation/native"
 
 import { removeDateFormat } from "@utils/removeDateFormat"
 import { handleOrderMealsByDate } from "@utils/handleOrderMealsByDate"
+import { handleMealsPercentageInTheDiet } from "@utils/handleMealsPercentageInTheDiet"
 
 import { mealsGetAll } from "@storage/meals/mealsGetAll"
 
@@ -27,36 +29,22 @@ export type MealTypeProps = {
 
 export function Home(){
   const [allMeals, setAllMeals] = useState<MealTypeProps[]>()
-  const [orderedMeals, setOrderedMeals] = useState<MealTypeProps[][]>()
+  const [orderedMealsByDate, setOrderedMealsByDate] = useState<MealTypeProps[][]>()
   const [isLoading, setIsLoading] = useState(false)
 
   const navigation = useNavigation()
 
-  function calculateMealsPercentageInTheDiet () {
-    const totalMeals = allMeals?.length
-    const totalMealsInTheDiet = allMeals?.filter(meal => meal.isInTheDiet).length
-
-    if (totalMeals && totalMealsInTheDiet){
-      const totalMealsPercentageInTheDiet = totalMealsInTheDiet / totalMeals * 100
-      
-      return Number(totalMealsPercentageInTheDiet.toFixed(2))
-    }
-  }
-
-  const mealsPercentageInTheDiet = calculateMealsPercentageInTheDiet() || 0
+  const mealsPercentageInTheDiet = handleMealsPercentageInTheDiet(allMeals) || 0
 
   async function fetchMeals(){
     try {
       setIsLoading(true)
       
-      const data = await mealsGetAll()
+      const mealsData = await mealsGetAll()
+      setAllMeals(mealsData)
 
-      setAllMeals(data)
-
-      const mealsOrderedByDate = handleOrderMealsByDate(data)
-      setOrderedMeals(mealsOrderedByDate)
-
-      setIsLoading(false)
+      const mealsOrderedByDate = handleOrderMealsByDate(mealsData)
+      setOrderedMealsByDate(mealsOrderedByDate)
       
     } catch (error) {
       Alert.alert('Refeições', 'Não foi possível carregas as refeições.')
@@ -94,7 +82,7 @@ export function Home(){
      {isLoading ? <Loading/> : (
         <>
           <MealsContainer>
-            {orderedMeals?.map((date, index) => (
+            {orderedMealsByDate?.map((date, index) => (
               <MealsDay key={index}>
                 <Date>
                   {removeDateFormat(date[0].date)}

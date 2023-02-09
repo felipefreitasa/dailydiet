@@ -1,4 +1,5 @@
-import { ViewProps } from "react-native";
+import { ViewProps } from "react-native"
+
 import { Container, Subtitle, Title } from "./styles"
 
 type Props = ViewProps &  {

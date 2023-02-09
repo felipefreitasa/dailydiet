@@ -2,12 +2,12 @@ import { useRoute } from "@react-navigation/native"
 
 import { useTheme } from "styled-components/native"
 
-import { MealTypeProps } from "@screens/Home";
+import { MealTypeProps } from "@screens/Home"
 
 import { Header } from "@components/Header"
 import { StatisticCard } from "@components/StatisticCard"
 import { RoundedContainer } from "@components/RoundedContainer"
-import { StatusBarDefault } from "@components/StatusBarDefault";
+import { StatusBarDefault } from "@components/StatusBarDefault"
 
 import { MealsInTheDietContainer, Paragraph, Percentage, StatisticsTitle, RowContainer } from "./styles"
 
