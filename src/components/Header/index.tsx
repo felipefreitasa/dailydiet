@@ -13,13 +13,9 @@ type Props = {
 export function Header({ arrowColor, backgroundColor, title }: Props){
   const navigation = useNavigation()
 
-  function handleGoBack(){
-    navigation.goBack()
-  }
-
   return(
     <Container backgroundColor={backgroundColor}>
-      <IconContainer onPress={handleGoBack}>
+      <IconContainer onPress={() => navigation.goBack()}>
         <ArrowLeft
           size={24}
           color={arrowColor}
